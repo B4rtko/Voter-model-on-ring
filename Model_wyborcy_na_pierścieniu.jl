@@ -43,8 +43,20 @@ function program_run(N, Δx, L)  # liczba agentów, koncentracja pozytywnych opi
 end
 
 
-result = program_run(100, 0.02, 1000)
+result = program_run(100, 0.05, 1000)
 
 df = DataFrame(result, ["x", "P+", "thau"])
 
 CSV.write("Semestr_4\\Fizyka_ukladów_złożonych\\Model_wyborcy_na_pierścieniu\\N100dx0.02L1000.csv", df)
+
+df = DataFrame(CSV.File("Semestr_4\\Fizyka_ukladów_złożonych\\Model_wyborcy_na_pierścieniu\\N100dx0.02L1000.csv"))
+
+a = Array(df)
+
+res = ""
+for row_num in 1:size(a)[1]
+    global res *= join(a[row_num, :], "  ") * "\n"
+end
+
+println(res)
+write("Semestr_4\\Fizyka_ukladów_złożonych\\Model_wyborcy_na_pierścieniu\\N100dx0.02L1000.txt", res)
